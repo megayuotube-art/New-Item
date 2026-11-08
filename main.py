@@ -225,7 +225,11 @@ def main(page: ft.Page):
   page.padding = 16
   page.scroll = ft.ScrollMode.AUTO
 
-  saved_key = page.client_storage.get("finnhub_api_key") or ""
+saved_key = ""
+try:
+    saved_key = page.client_storage.get("finnhub_api_key") or ""
+except Exception:
+    saved_key = ""
 
   api_input = ft.TextField(
       label="Finnhub API Key",
