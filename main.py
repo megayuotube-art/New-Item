@@ -223,15 +223,9 @@ def main(page: ft.Page):
     page.padding = 16
     page.scroll = ft.ScrollMode.AUTO
 
-    saved_key = ""
-    try:
-        saved_key = page.client_storage.get("finnhub_api_key") or ""
-    except Exception:
-        saved_key = ""
-
     api_input = ft.TextField(
         label="Finnhub API Key",
-        value=saved_key,
+        value="",
         password=True,
         can_reveal_password=True,
         hint_text="Finnhub.io kalitingizni kiriting",
@@ -239,9 +233,8 @@ def main(page: ft.Page):
     )
 
     def save_api_key(e):
-        page.client_storage.set("finnhub_api_key", api_input.value.strip())
         page.snack_bar = ft.SnackBar(
-            ft.Text("✅ API kalit saqlandi!"), bgcolor=ft.Colors.GREEN_700
+            ft.Text("✅ API kalit qabul qilindi!"), bgcolor=ft.Colors.GREEN_700
         )
         page.snack_bar.open = True
         page.update()
