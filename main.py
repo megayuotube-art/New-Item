@@ -157,7 +157,7 @@ class FundamentalEngine:
         return cot_map.get(pair, "Yirik fondlar (COT): Neytral institutsional oqim")
 
 
-# --- SAF & FAST TEXNIK TAHLIL (SKLEARN'SIZ) ---
+# --- SAF & FAST TEXNIK TAHLIL ---
 def fetch_and_predict(symbol: str, timeframe: str = "1h"):
     df = yf.download(symbol, period="60d", interval=timeframe, progress=False)
     if df.empty or len(df) < 30:
@@ -169,7 +169,6 @@ def fetch_and_predict(symbol: str, timeframe: str = "1h"):
     df["SMA_20"] = df["Close"].rolling(20).mean()
     df["SMA_50"] = df["Close"].rolling(50).mean()
 
-    # RSI
     delta = df["Close"].diff()
     gain = (delta.where(delta > 0, 0)).rolling(14).mean()
     loss = (-delta.where(delta < 0, 0)).rolling(14).mean()
@@ -400,12 +399,12 @@ def main(page: ft.Page):
             weight=ft.FontWeight.BOLD,
             color=ft.Colors.CYAN_400,
         ),
-        ft.Row([api_input, ft.ElevatedButton("Saqlash", on_click=save_api_key)]),
+        ft.Row([api_input, ft.Button("Saqlash", on_click=save_api_key)]),
         ft.Row([pair_dropdown, tf_dropdown]),
         ft.Row([
             balance_input,
             risk_input,
-            ft.ElevatedButton(
+            ft.Button(
                 "TAHLIL QILISH",
                 on_click=run_analysis,
                 bgcolor=ft.Colors.CYAN_700,
