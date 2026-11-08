@@ -15,3 +15,5 @@ workflows:
       - name: Build Flet APK
         script: |
           yes | flet build apk
+    artifacts:
+      - build/apk/*.apk
