@@ -2,7 +2,6 @@ workflows:
   flet-android-build:
     name: Flet Android APK Build
     max_build_duration: 60
-    instance_type: linux
     environment:
       flutter: stable
       vars:
@@ -13,12 +12,10 @@ workflows:
         script: |
           pip3 install --upgrade pip
           pip3 install flet
-          # Agar requirements.txt faylingiz bo'lsa, pastdagi qatorni ham oching:
+          # Agar requirements.txt faylingiz bo'lsa, pastdagi qatorni oching:
           # pip3 install -r requirements.txt
-
       - name: Build Flet APK
         script: |
-          yes | flet build apk --yes
-
+          flet build apk
     artifacts:
       - build/apk/*.apk
