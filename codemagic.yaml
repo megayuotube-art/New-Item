@@ -11,7 +11,7 @@ workflows:
       - name: Install Python dependencies
         script: |
           pip3 install --upgrade pip
-          pip3 install flet
+          pip3 install flet==1.1.1
       - name: Build Flet APK
         script: |
           yes | flet build apk
