@@ -5,17 +5,13 @@ workflows:
     environment:
       flutter: stable
       vars:
-        # Flet build paytida savol bermasligi uchun
         CI: "true"
+        FLET_SUPPRESS_ANALYTICS: "true"
     scripts:
       - name: Install Python dependencies
         script: |
           pip3 install --upgrade pip
           pip3 install flet
-          # Agar requirements.txt faylingiz bo'lsa, pastdagi qatorni oching:
-          # pip3 install -r requirements.txt
       - name: Build Flet APK
         script: |
-          flet build apk
-    artifacts:
-      - build/apk/*.apk
+          yes | flet build apk
